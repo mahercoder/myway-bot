@@ -31,7 +31,7 @@ async function broadcast(ctx){
         let receiverCount = 0
         let stopperCount = 0
     
-        const users = await Users.findAll({ where: { name: "Mohirbek" } })
+        const users = await Users.findAll()
     
         for(let i=0; i < users.length; i++){
             try{
