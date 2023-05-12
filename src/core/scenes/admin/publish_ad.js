@@ -26,31 +26,37 @@ function makeVerifyInlineKeyboard(ctx){
 }
 
 async function broadcast(ctx){
-    let receiverCount = 0
-    let stopperCount = 0
 
-    const users = await Users.findAll()
-
-    for(let i=0; i < users.length; i++){
-        try{
-            await ctx.telegram.copyMessage(
-                users[i].id, 
-                ctx.from.id, 
-                ctx.session.adMsgAgreement.message_id,
-                { parse_mode: 'HTML', reply_markup: ctx.session.adKeyboard }
-            )
-
-            receiverCount++
-        }catch(err){
-            // Forbidden: bot was blocked by the user
-            if(err.error_code == 403){
-                stopperCount++ 
+    try{
+        let receiverCount = 0
+        let stopperCount = 0
+    
+        const users = await Users.findAll({ where: { name: "Mohirbek" } })
+    
+        for(let i=0; i < users.length; i++){
+            try{
+                await ctx.telegram.copyMessage(
+                    users[i].telegramId, 
+                    ctx.from.id, 
+                    ctx.session.adMsgAgreement.message_id,
+                    { parse_mode: 'HTML', reply_markup: ctx.session.adKeyboard }
+                )
+                receiverCount++
+            }catch(err){
+                // Forbidden: bot was blocked by the user
+                // if(err.error_code == 403){
+                    // stopperCount++ 
+                // }
             }
         }
-    }
+    
+        stopperCount = users.length - receiverCount
 
-    return {
-        userCount: users.length, receiverCount, stopperCount
+        return {
+            userCount: users.length, receiverCount, stopperCount
+        }
+    }catch(err){
+        console.log(err)
     }
 }
 

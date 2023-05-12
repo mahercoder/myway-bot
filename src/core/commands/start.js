@@ -7,15 +7,15 @@ module.exports = {
     action:
     async function(ctx){
         ctx.reply("Open Budget tashabbuslarida aktiv bo'ling. Bizdan uzoqlashmang!")
-        // const [savedUser, created] = await Users.findOrCreate({
-        //     where: { id: ctx.from.id },
-        //     defaults: {
-        //         id: ctx.from.id,
-        //         fullname: ctx.from.first_name ? ctx.from.first_name : "Noma'lum" + ' ' + ctx.from.last_name ? ctx.from.last_name : '',
-        //         username: ctx.from.username,
-        //         createdAt: helpers.getGMT5().toISOString()
-        //     }
-        // })
+        
+        const [savedUser, created] = await Users.findOrCreate({
+            where: { telegramId: ctx.from.id },
+            defaults: {
+                telegramId: ctx.from.id,
+                name: ctx.from.first_name ? ctx.from.first_name : "Noma'lum" + ' ' + ctx.from.last_name ? ctx.from.last_name : '',
+                createdAt: helpers.getGMT5().toISOString()
+            }
+        })
 
         // if(created){
         //     try{
