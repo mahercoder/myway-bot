@@ -1,0 +1,31 @@
+{
+  "name": "myway-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "pm2 start index.js --name myway_1",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "@telegraf/session": "^2.0.0-beta.6",
+    "arraylist": "^0.1.0",
+    "axios": "^1.4.0",
+    "phone": "^3.1.37",
+    "redis": "^4.6.6",
+    "sequelize": "^6.31.1",
+    "sqlite3": "^5.1.6",
+    "telegraf": "^4.12.2",
+    "telegraf-i18n": "^6.6.0",
+    "winston": "^3.8.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "*/*"
+    ]
+  }
+}
